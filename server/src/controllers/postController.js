@@ -1,4 +1,4 @@
-import Post from '../models/Post';
+import Post from '../models/Post.js';
 import Comment from '../models/Comment.js';
 import asyncHandler from '../middleware/asyncHandler.js';
 
@@ -90,4 +90,13 @@ export const deleteComment = asyncHandler(async (req, res) => {
     await Post.findByIdAndUpdate(comment.post, {$pull: {comments: comment._id}})
     await comment.deleteOne();
     res.json({message: 'Comment deleted', postId: comment.post});
+})
+
+// POST /api/posts/upload (multipart/form-data, field name: "image")
+export const uploadImage = asyncHandler(async (req, res) => {
+    if(!req.file){
+        res.status(400);
+        throw new Error('No image file provided');
+    }
+    res.json({url: req.file.path}); // Cloudinary URL
 })

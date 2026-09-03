@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
-import User from "../models/User";
-import { generateAccessToken, generateRefreshToken } from "../utils/generateToken";
+import User from "../models/User.js";
+import { generateAccessToken, generateRefreshToken } from "../utils/generateToken.js";
 import asyncHandler from '../middleware/asyncHandler.js';
 
 const cookieOptions = {
